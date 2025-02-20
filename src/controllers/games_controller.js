@@ -1,4 +1,5 @@
 const prisma = require("../db/prisma");
+const { getEmailContent } = require("../lib/template/emailTemplate");
 
 const getAllGames = async (req, res) => {
   try {
