@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model GameImage {
+  id              Int       @id @default(autoincrement())
+  src             String    
+  gameId          Int
+  game            Game      @relation(fields: [gameId], references: [id])
+}
+
+model ConsoleImage {
+  id              Int       @id @default(autoincrement())
+  src             String    
+  consoleId       Int
+  console         Console   @relation(fields: [consoleId], references: [id])
+}
+
+model Gender {
+  id              Int       @id @default(autoincrement())
+  name            String    
+  gameId          Int
+  game            Game      @relation(fields: [gameId], references: [id])
+}
+
+model PEGI {
+  id              Int       @id @default(autoincrement())
+  name            String
+  gameId          Int
+  game            Game      @relation(fields: [gameId], references: [id]) 
+}
+
+model Game {
+  id              Int       @id @default(autoincrement())
+  name            String
+  description     String
+  gender          Gender[]
+  pegi            PEGI[]
+  images          GameImage[]
+  price           Int
+  stars           Int
+}
+
+model Console {
+  id              Int       @id @default(autoincrement())
+  name            String
+  description     String
+  images          ConsoleImage[]
+  price           Int
+  stars           Int
+}
