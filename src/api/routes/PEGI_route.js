@@ -1,4 +1,4 @@
-const pegiController = require("../controllers/PEGI_controller");
+const pegiController = require("../../controllers/PEGI_controller");
 const express = require("express");
 
 const router = express.Router();

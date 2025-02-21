@@ -4,7 +4,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "nodemailer": "^6.10.0",
-    "prisma": "^6.4.0"
+    "prisma": "^6.4.0",
+    "stripe": "^17.6.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

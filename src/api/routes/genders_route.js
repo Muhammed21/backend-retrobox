@@ -1,4 +1,4 @@
-const gendersController = require("../controllers/genders_controller");
+const gendersController = require("../../controllers/genders_controller");
 const express = require("express");
 
 const router = express.Router();

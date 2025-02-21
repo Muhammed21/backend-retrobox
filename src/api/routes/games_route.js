@@ -1,4 +1,4 @@
-const gamesController = require("../controllers/games_controller");
+const gamesController = require("../../controllers/games_controller");
 const express = require("express");
 
 const router = express.Router();
