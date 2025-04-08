@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const { toNodeHandler } = require("better-auth/node");
+const { fromNodeHeaders } = require("better-auth/node");
 
+const { auth } = require("./src/lib/auth");
 const gameRoutes = require("./src/api/routes/games_route");
 const consoleRouters = require("./src/api/routes/consoles_route");
 const genderRouters = require("./src/api/routes/genders_route");
@@ -11,10 +14,30 @@ const app = express();
 
 const port = 3000;
 const route = "/api/v1";
+const CLIENT_SIDE_URL = process.env.BETTER_AUTH_URL;
+
+app.use(
+  cors({
+    origin: `${CLIENT_SIDE_URL}`,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// AUTHENTIFICATION
+
+app.all("/api/auth/*", toNodeHandler(auth));
+
+app.get("/api/me", async (req, res) => {
+  const session = await auth.api.getSession({
+    headers: fromNodeHeaders(req.headers),
+  });
+  return res.json(session);
+});
+
+// MONT EXPRESS JSON
 
 app.use(express.json());
-
-app.use(cors());
 
 // EMAIL API
 
