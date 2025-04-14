@@ -9,6 +9,8 @@ const getAllGames = async (req, res) => {
       },
       include: {
         images: true,
+        gender: true,
+        pegi: true,
       },
     });
     res.status(200).json(games);
@@ -25,6 +27,8 @@ const getGameById = async (req, res) => {
       },
       include: {
         images: true,
+        gender: true,
+        pegi: true,
       },
     });
     res.status(200).json(game);
