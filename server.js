@@ -9,6 +9,7 @@ const consoleRouters = require("./src/api/routes/consoles_route");
 const genderRouters = require("./src/api/routes/genders_route");
 const PEGIRouters = require("./src/api/routes/PEGI_route");
 const emailRoute = require("./src/api/routes/email_route");
+const handler = require("./src/api/checkout/route");
 
 const app = express();
 
@@ -38,6 +39,10 @@ app.get("/api/me", async (req, res) => {
 // MONT EXPRESS JSON
 
 app.use(express.json());
+
+// STRIPE ROUTES
+
+app.post(`${route}/checkout/stripe`, handler);
 
 // EMAIL API
 
