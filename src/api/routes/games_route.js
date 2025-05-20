@@ -11,4 +11,8 @@ router.get("/games/images", gamesController.getAllImages);
 
 router.get("/games/image/:id", gamesController.getImageById);
 
+router.get("/games/vignette", gamesController.getAllVignettes);
+
+router.get("/games/vignette/:id", gamesController.getVignetteById);
+
 module.exports = router;

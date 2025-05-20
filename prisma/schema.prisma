@@ -21,6 +21,13 @@ model GameImage {
   game   Game   @relation(fields: [gameId], references: [id])
 }
 
+model GameVignettes {
+  id     Int    @id @default(autoincrement())
+  src    String
+  gameId Int
+  game   Game   @relation(fields: [gameId], references: [id])
+}
+
 model ConsoleImage {
   id        Int     @id @default(autoincrement())
   src       String
@@ -43,12 +50,13 @@ model PEGI {
 }
 
 model Game {
-  id          Int         @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   name        String
   description String
   gender      Gender[]
   pegi        PEGI[]
   images      GameImage[]
+  vignettes   GameVignettes[]
   price       Int
   stars       Int
 }

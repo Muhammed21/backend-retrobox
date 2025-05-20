@@ -69,9 +69,43 @@ const getImageById = async (req, res) => {
   }
 };
 
+const getAllVignettes = async (req, res) => {
+  try {
+    const vignettes = await prisma.gameVignettes.findMany({
+      orderBy: {
+        id: "asc",
+      },
+      include: {
+        game: true,
+      },
+    });
+    res.status(200).json(vignettes);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch vignettes" });
+  }
+};
+
+const getVignetteById = async (req, res) => {
+  try {
+    const vignette = await prisma.gameVignettes.findFirst({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      include: {
+        game: true,
+      },
+    });
+    res.status(200).json(vignette);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch vignette with your id" });
+  }
+};
+
 module.exports = {
   getAllGames,
   getGameById,
   getAllImages,
   getImageById,
+  getAllVignettes,
+  getVignetteById,
 };
